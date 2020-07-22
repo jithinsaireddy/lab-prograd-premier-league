@@ -5,6 +5,10 @@ let currentTeam = "Manchester FC";
 let trophiesWon = 27;
 
 //Write your function here
+function createManager(managerName, managerAge, currentTeam, trophiesWon) {
+  var manager = [managerName, managerAge, currentTeam, trophiesWon];
+  return manager;
+}
 
 // Don't edit the following code
 try {
@@ -15,6 +19,7 @@ try {
     trophiesWon
   );
 } catch (e) {
+  //createManager(e);
   // do nothing - expected error
 }
 
@@ -22,6 +27,18 @@ try {
 var formation = [4, 4, 3];
 
 //write your function here
+
+function createFormation(formation) {
+  if (formation.length == 0) {
+    return null;
+  }
+  var play = {
+    defender: formation[0],
+    midfield: formation[1],
+    forward: formation[2],
+  };
+  return play;
+}
 
 // Dont edit the following code
 
@@ -31,23 +48,105 @@ try {
   //do nothing
 }
 
-//Progression 3 - Filter players that debuted in ___ year
+//Progression 3 - Filter players that debuted in _ year
 
-//Progression 4 - Filter players that play at the position _______
+function filterByDebut(year) {
+  var arr = [];
+  players.forEach((element) => {
+    if (element.debut == year) {
+      arr.push(element);
+    }
+  });
+  return arr;
+}
 
-//Progression 5 - Filter players that have won ______ award
+//Progression 4 - Filter players that play at the position ___
 
-//Progression 6 - Filter players that won ______ award ____ times
+function filterByPosition(position) {
+  var arr = [];
+  players.forEach((element) => {
+    if (element.position == position) {
+      arr.push(element);
+    }
+  });
+  return arr;
+}
 
-//Progression 7 - Filter players that won ______ award and belong to ______ country
+//Progression 5 - Filter players that have won __ award
 
-//Progression 8 - Filter players that won atleast ______ awards, belong to ______ team and are younger than ____
+function filterByAward(awardName) {
+  let Array = [];
+  for (let i = 0; i < players.length; i++) {
+    for (let j = 0; j < players[i].awards.length; j++) {
+      if (players[i].awards[j].name === awardName) {
+        Array.push(players[i]);
+      }
+    }
+  }
+  return Array;
+}
+
+//Progression 6 - Filter players that won __ award __ times
+
+function filterByAwardxTimes(awardName, noOfTimes) {
+  let arr = [];
+  let count = 0,
+    m = 0;
+  let j;
+  for (let i = 0; i < players.length; i++) {
+    for (let j = 0; j < players[i].awards.length; j++) {
+      if (players[i].awards[j].name == awardName) {
+        count++;
+      }
+    }
+    if (count == noOfTimes) {
+      arr.push(players[i]);
+    }
+    count = 0;
+  }
+  return arr;
+}
+
+//Progression 7 - Filter players that won __ award and belong to __ country
+
+function filterByAwardxCountry(awardName, country) {
+  let arr = [];
+  let c = 0;
+  for (let i = 0; i < players.length; i++) {
+    if (players[i].country == country) {
+      for (let j = 0; j < players[i].awards.length; j++) {
+        if (players[i].awards[j].name == awardName) {
+          arr[c++] = players[i];
+        }
+      }
+    }
+  }
+
+  return arr;
+}
+
+//Progression 8 - Filter players that won atleast __ awards, belong to __ team and are younger than __
+
+function filterByNoOfAwardsxTeamxAge(noOfAwards, team, age) {
+  let arr = [];
+  let c = 0;
+  for (let i = 0; i < players.length; i++) {
+    if (
+      players[i].awards.length >= noOfAwards &&
+      players[i].team == team &&
+      players[i].age <= age
+    ) {
+      arr[c++] = players[i];
+    }
+  }
+  return arr;
+}
 
 //Progression 9 - Sort players in descending order of their age
 
-//Progression 10 - Sort players beloging to _____ team in descending order of awards won
+//Progression 10 - Sort players beloging to ___ team in descending order of awards won
 
-//Challenge 1 - Sort players that have won _______ award _____ times and belong to _______ country in alphabetical order of their names
+//Challenge 1 - Sort players that have won ___ award __ times and belong to ____ country in alphabetical order of their names
 
-//Challenge 2 - Sort players that are older than _____ years in alphabetical order
+//Challenge 2 - Sort players that are older than ___ years in alphabetical order
 //Sort the awards won by them in reverse chronological order
